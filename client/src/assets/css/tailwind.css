@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 :root {
+  --header-height: 60px;
+  --toolbar-height: 50px;
 }
 
 * {
@@ -33,9 +35,9 @@ button:disabled {
 .custom-scrollbar::-webkit-scrollbar {
   @apply w-[7px];
 }
-.custom-scrollbar ::-webkit-scrollbar-track {
+.custom-scrollbar::-webkit-scrollbar-track {
   @apply bg-white;
 }
-.custom-scrollbar ::-webkit-scrollbar-thumb {
+.custom-scrollbar::-webkit-scrollbar-thumb {
   @apply bg-[#d3d3d3] rounded-[10px];
 }

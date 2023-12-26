@@ -1,4 +1,4 @@
-export const config = {
+export const config: IConfig = {
   customFonts: [
     "open-sans",
     "barlow-condensed",

@@ -2,16 +2,19 @@ import { lazy } from "react";
 import { Navigate, RouteObject, useRoutes } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 
-let AuthLayout = lazy(() => import(`@/layouts/AuthLayout`));
-let SignIn = lazy(() => import(`@/pages/SignIn`));
-let SignUp = lazy(() => import(`@/pages/SignUp`));
+const AuthLayout = lazy(() => import(`@/layouts/AuthLayout`));
+const SignIn = lazy(() => import(`@/pages/SignIn`));
+const SignUp = lazy(() => import(`@/pages/SignUp`));
 
-let PageNotFound = lazy(() => import(`@/pages/NotFound`));
+const DocumentDetail = lazy(() => import(`@/pages/DocumentDetail`));
 
-let routes: RouteObject[] = [
+const PageNotFound = lazy(() => import(`@/pages/NotFound`));
+
+const routes: RouteObject[] = [
   {
     path: "",
-    element: <Navigate to="/auth/sign-in" replace />,
+    // element: <Navigate to="/auth/sign-in" replace />,
+    element: <Navigate to="/123/detail" replace />,
   },
   {
     path: "auth",
@@ -38,6 +41,10 @@ let routes: RouteObject[] = [
         ),
       },
     ],
+  },
+  {
+    path: "/:documentId/detail",
+    element: <DocumentDetail />,
   },
   { path: "*", element: <PageNotFound /> },
 ];
