@@ -241,7 +241,7 @@ const ToolBar = () => {
             {({ onClose }) => {
               return (
                 <Fragment>
-                  <Tooltip className="tooltip" label="Fill color">
+                  <Tooltip className="tooltip" label="Highlight color">
                     <Box>
                       <PopoverTrigger>
                         <button
@@ -319,7 +319,7 @@ const ToolBar = () => {
         <div className="flex items-center gap-3 px-4">
           <div className="relative w-56 h-7">
             <input
-              placeholder="Find in sheet"
+              placeholder="Find in document"
               className="w-full h-full text-sm focus:outline-2 focus:outline-dark-blue pl-3 pr-8 rounded"
               onChange={handleSearch}
             />
