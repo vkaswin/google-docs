@@ -1,7 +1,7 @@
 {
-    "name": "google-sheets",
+    "name": "google-docs",
     "version": "1.0.0",
-    "description": "Google Sheets",
+    "description": "Google Docs",
     "main": "index.ts",
     "scripts": {
         "build": "tsc",

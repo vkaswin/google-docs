@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+}
+
+* {
+  @apply m-0 p-0 box-border;
+}
+
+html {
+  @apply h-full;
+}
+
+body {
+  @apply font-regular h-full;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  @apply appearance-none m-0;
+}
+
+button:disabled {
+  @apply opacity-50;
+}
+
+#root {
+  @apply h-full;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  @apply w-[7px];
+}
+.custom-scrollbar ::-webkit-scrollbar-track {
+  @apply bg-white;
+}
+.custom-scrollbar ::-webkit-scrollbar-thumb {
+  @apply bg-[#d3d3d3] rounded-[10px];
+}

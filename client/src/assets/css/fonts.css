@@ -1,0 +1,102 @@
+@font-face {
+  font-family: "Open Sans";
+  src: url("../fonts/open-sans/OpenSans-Regular.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Open Sans Light";
+  src: url("../fonts/open-sans/OpenSans-Light.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Open Sans SemiBold";
+  src: url("../fonts/open-sans/OpenSans-SemiBold.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Open Sans Medium";
+  src: url("../fonts/open-sans/OpenSans-Medium.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Open Sans Bold";
+  src: url("../fonts/open-sans/OpenSans-Bold.ttf");
+  font-display: swap;
+}
+
+.open-sans {
+  font-family: "Open Sans", sans-serif;
+}
+
+.barlow-condensed {
+  font-family: "Barlow Condensed", sans-serif;
+}
+
+.caveat {
+  font-family: "Caveat", cursive;
+}
+.crimson-text {
+  font-family: "Crimson Text", serif;
+}
+.inter {
+  font-family: "Inter", sans-serif;
+}
+.lato {
+  font-family: "Lato", sans-serif;
+}
+
+.lobster {
+  font-family: "Lobster", sans-serif;
+}
+
+.dancing-script {
+  font-family: "Dancing Script", cursive;
+}
+
+.montserrat {
+  font-family: "Montserrat", sans-serif;
+}
+
+.nunito-sans {
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.oswald {
+  font-family: "Oswald", sans-serif;
+}
+
+.oxygen {
+  font-family: "Oxygen", sans-serif;
+}
+
+.pacifico {
+  font-family: "Pacifico", cursive;
+}
+
+.poppins {
+  font-family: "Poppins", sans-serif;
+}
+
+.quicksand {
+  font-family: "Quicksand", sans-serif;
+}
+
+.roboto {
+  font-family: "Roboto", sans-serif;
+}
+
+.roboto-mono {
+  font-family: "Roboto Mono", monospace;
+}
+
+.rubik {
+  font-family: "Rubik", sans-serif;
+}
+
+.ubuntu {
+  font-family: "Ubuntu", sans-serif;
+}
