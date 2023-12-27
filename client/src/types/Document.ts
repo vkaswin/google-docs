@@ -1,4 +1,7 @@
 type IConfig = {
+  docWidth: number;
+  docHeight: number;
+  rulerOffset: number;
   defaultFont: string;
   defaultFontSize: string;
   customFonts: string[];

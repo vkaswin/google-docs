@@ -1,7 +1,12 @@
+import { DocumentProvider } from "@/hooks/useDocument";
 import Document from "@/components/Document";
 
 const SheetDetail = () => {
-  return <Document />;
+  return (
+    <DocumentProvider>
+      <Document />
+    </DocumentProvider>
+  );
 };
 
 export default SheetDetail;

@@ -5,6 +5,7 @@
 :root {
   --header-height: 60px;
   --toolbar-height: 50px;
+  --ruler-size: 24px;
 }
 
 * {
@@ -32,12 +33,12 @@ button:disabled {
   @apply h-full;
 }
 
-.custom-scrollbar::-webkit-scrollbar {
-  @apply w-[7px];
+/* .custom-scrollbar::-webkit-scrollbar {
+  @apply w-[7px] h-[7px];
 }
 .custom-scrollbar::-webkit-scrollbar-track {
   @apply bg-white;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
   @apply bg-[#d3d3d3] rounded-[10px];
-}
+} */

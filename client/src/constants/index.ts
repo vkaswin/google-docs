@@ -1,4 +1,7 @@
 export const config: IConfig = {
+  docWidth: 816,
+  docHeight: 1056,
+  rulerOffset: 12,
   customFonts: [
     "open-sans",
     "barlow-condensed",

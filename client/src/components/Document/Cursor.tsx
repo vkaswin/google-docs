@@ -1,9 +1,5 @@
 const Cursor = () => {
-  return (
-    <div className="absolute top-0 left-0">
-      <span>Cursor</span>
-    </div>
-  );
+  return <div className="absolute top-0 left-0"></div>;
 };
 
 export default Cursor;
