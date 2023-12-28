@@ -62,7 +62,7 @@ const VerticalRuler = () => {
             style={{ top }}
           >
             {label && (
-              <span className="absolute -top-2 right-3 text-xs text-dark-gray font-medium">
+              <span className="absolute -top-[7px] right-2 text-[10px] text-dark-gray font-medium">
                 {label}
               </span>
             )}

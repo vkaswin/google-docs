@@ -1,6 +1,19 @@
 import EventEmitter from "./EventEmitter";
 
-type IEditorEvents = "change";
+type IEditorContent = {
+  text: string;
+  props: {
+    bold: boolean;
+    strikeThrough: boolean;
+    underline: boolean;
+    fontSize: string;
+    fontFamily: string;
+    backgroundColor: string;
+    color: string;
+    textAlign: string;
+    link: boolean;
+  };
+};
 
 export default class Editor extends EventEmitter {
   private excludeKeys = new Set([
@@ -19,6 +32,8 @@ export default class Editor extends EventEmitter {
   private preventKeys = new Set(["Space", "Tab"]);
 
   public root: HTMLElement | null = null;
+
+  private content: IEditorContent[] = [];
 
   constructor(container: string | HTMLElement) {
     super();
@@ -47,11 +62,11 @@ export default class Editor extends EventEmitter {
     console.log(key, code);
   };
 
-  public on(event: IEditorEvents, cb: Function) {
+  public on(event: string, cb: Function) {
     this.addEventListener(event, cb);
   }
 
-  public off(event: IEditorEvents, cb: Function) {
+  public off(event: string, cb: Function) {
     this.removeEventListener(event, cb);
   }
 

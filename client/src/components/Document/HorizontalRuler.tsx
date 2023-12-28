@@ -65,7 +65,7 @@ const HorizontalRuler = () => {
               style={{ left }}
             >
               {label && (
-                <span className="absolute top-0 text-xs text-dark-gray font-medium">
+                <span className="absolute top-0 -left-[2px] text-[10px] text-dark-gray font-medium">
                   {label}
                 </span>
               )}
