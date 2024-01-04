@@ -2,6 +2,21 @@ export const config: IConfig = {
   docWidth: 816,
   docHeight: 1056,
   rulerOffset: 12,
+  editor: {
+    excludeKeys: new Set([
+      "Enter",
+      "ShiftRight",
+      "ShiftLeft",
+      "CapsLock",
+      "ControlRight",
+      "ControlLeft",
+      "AltRight",
+      "AltLeft",
+      "Escape",
+      "Insert",
+    ]),
+    preventKeys: new Set(["Space", "Tab"]),
+  },
   customFonts: [
     "open-sans",
     "barlow-condensed",
