@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas Text Editor</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+      }
+      canvas {
+        border: 1px solid #ccc;
+        cursor: text;
+      }
+    </style>
+    <script src="editor.js"></script>
+  </head>
+  <body>
+    <canvas id="editor" width="998" height="400"></canvas>
+    <script>
+      // Editor state
+      let text = "Sample Text";
+      let selectionStart = 0;
+      let selectionEnd = text.length;
+      let startIndex = null;
+
+      // Canvas
+      const canvas = document.getElementById("editor");
+      const ctx = canvas.getContext("2d");
+      const lineHeight = 20;
+
+      // Function to render text onto the canvas
+      function render() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.font = "16px Arial";
+        ctx.fillStyle = "#000";
+        ctx.fillText(text, 10, 20);
+
+        // Draw selection
+        const selectedText = text.substring(selectionStart, selectionEnd);
+        const selectedWidth = ctx.measureText(selectedText).width;
+        const startX =
+          ctx.measureText(text.substring(0, selectionStart)).width + 10;
+        ctx.fillStyle = "rgba(0, 0, 255, 0.3)";
+        ctx.fillRect(startX, 5, selectedWidth, lineHeight);
+      }
+
+      // Function to handle text selection
+      function selectText(selectionStartIndex, selectionEndIndex) {
+        selectionStart = Math.min(selectionStartIndex, selectionEndIndex);
+        selectionEnd = Math.max(selectionStartIndex, selectionEndIndex);
+        render();
+      }
+
+      // Event listener for mouse selection
+      canvas.addEventListener("mousedown", function (event) {
+        const mouseX = event.clientX - canvas.getBoundingClientRect().left;
+        const charIndex = Math.round(
+          ((mouseX - 10) / ctx.measureText("Sample Text").width) * text.length
+        );
+        startIndex = charIndex;
+
+        canvas.addEventListener("mousemove", function (event) {
+          if (startIndex === null) return;
+          const mouseX = event.clientX - canvas.getBoundingClientRect().left;
+          const charIndex = Math.round(
+            ((mouseX - 10) / ctx.measureText("Sample Text").width) * text.length
+          );
+          selectText(startIndex, charIndex);
+        });
+      });
+
+      // Initial render
+      render();
+
+      const editor = new Editor("#editor");
+    </script>
+  </body>
+</html>

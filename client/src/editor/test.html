@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas Text Editor</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="editorCanvas" width="400" height="300"></canvas>
+    <script>
+      const canvas = document.getElementById("editorCanvas");
+      const ctx = canvas.getContext("2d");
+      const cursorWidth = 1;
+      const cursorColor = "black";
+      const cursorInterval = 500; // Cursor blink interval in milliseconds
+
+      let text = "";
+      let selectionStart = 0;
+      let selectionEnd = 0;
+      let cursorVisible = true;
+
+      // Start cursor blinking
+      setInterval(toggleCursorVisibility, cursorInterval);
+
+      // Handle text input
+      document.addEventListener("keydown", function (event) {
+        if (event.key.length === 1) {
+          // If a printable character
+          text =
+            text.slice(0, selectionStart) +
+            event.key +
+            text.slice(selectionEnd);
+          selectionStart++;
+          selectionEnd++;
+        } else if (
+          event.key === "Backspace" &&
+          selectionStart !== selectionEnd
+        ) {
+          text = text.slice(0, selectionStart) + text.slice(selectionEnd);
+          selectionEnd = selectionStart;
+        } else if (event.key === "ArrowLeft" && selectionStart > 0) {
+          selectionStart--;
+          selectionEnd = selectionStart;
+        } else if (event.key === "ArrowRight" && selectionEnd < text.length) {
+          selectionEnd++;
+          selectionStart = selectionEnd;
+        } else if (event.key === "Enter") {
+          // Insert a line break at the current cursor position
+          text =
+            text.slice(0, selectionStart) + "\n" + text.slice(selectionEnd);
+          selectionStart++;
+          selectionEnd++;
+        } else if (event.key.length === 1) {
+          // If a printable character
+          text =
+            text.slice(0, selectionStart) +
+            event.key +
+            text.slice(selectionEnd);
+          selectionStart++;
+          selectionEnd++;
+        } else if (
+          event.key === "Backspace" &&
+          selectionStart !== selectionEnd
+        ) {
+          text = text.slice(0, selectionStart) + text.slice(selectionEnd);
+          selectionEnd = selectionStart;
+        } else if (event.key === "Backspace" && selectionStart > 0) {
+          if (text.charAt(selectionStart - 1) === "\n") {
+            // If the character before the cursor is a line break, remove it
+            text = text.slice(0, selectionStart - 1) + text.slice(selectionEnd);
+            selectionStart--;
+            selectionEnd--;
+          } else {
+            // Otherwise, remove the character before the cursor
+            text = text.slice(0, selectionStart - 1) + text.slice(selectionEnd);
+            selectionStart--;
+            selectionEnd = selectionStart;
+          }
+        } else if (event.key === "ArrowLeft" && selectionStart > 0) {
+          selectionStart--;
+          selectionEnd = selectionStart;
+        } else if (event.key === "ArrowRight" && selectionEnd < text.length) {
+          selectionEnd++;
+          selectionStart = selectionEnd;
+        } else if (event.key === "ArrowUp") {
+          // Handle moving cursor to previous line
+        } else if (event.key === "ArrowDown") {
+          // Handle moving cursor to next line
+        }
+        drawText();
+      });
+
+      // Draw text and cursor
+      function drawText() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.font = "20px Arial";
+
+        let offsetY = 30; // Initial offset from top edge of canvas
+        let lines = text.split("\n");
+
+        for (let i = 0; i < lines.length; i++) {
+          ctx.fillText(lines[i], 10, offsetY);
+          offsetY += 20; // Adjust for line height
+        }
+
+        // Draw selection
+        if (selectionStart !== selectionEnd) {
+          const start =
+            ctx.measureText(text.substring(0, selectionStart)).width + 10;
+          const end =
+            ctx.measureText(text.substring(0, selectionEnd)).width + 10;
+          const selectionWidth = end - start;
+          ctx.fillStyle = "rgba(0, 0, 255, 0.2)";
+          ctx.fillRect(start, 10, selectionWidth, 20);
+        }
+
+        // Draw cursor
+        if (cursorVisible && selectionStart === selectionEnd) {
+          const cursorX =
+            ctx.measureText(text.substring(0, selectionStart)).width + 10;
+          ctx.beginPath();
+          ctx.moveTo(cursorX, 10);
+          ctx.lineTo(cursorX, 30);
+          ctx.strokeStyle = cursorColor;
+          ctx.lineWidth = cursorWidth;
+          ctx.stroke();
+        }
+      }
+
+      // Toggle cursor visibility
+      function toggleCursorVisibility() {
+        cursorVisible = !cursorVisible;
+        drawText();
+      }
+
+      // Initial draw
+      drawText();
+
+      // Add mouse event listeners to handle text selection
+      canvas.addEventListener("mousedown", handleMouseDown);
+      canvas.addEventListener("mousemove", handleMouseMove);
+      canvas.addEventListener("mouseup", handleMouseUp);
+
+      let isDragging = false;
+
+      function handleMouseDown(event) {
+        const mouseX = event.clientX - canvas.getBoundingClientRect().left;
+        const mouseY = event.clientY - canvas.getBoundingClientRect().top;
+
+        selectionStart = getCharacterIndexAtPosition(mouseX, mouseY);
+        selectionEnd = selectionStart;
+        isDragging = true;
+        drawText();
+      }
+
+      function handleMouseMove(event) {
+        if (isDragging) {
+          const mouseX = event.clientX - canvas.getBoundingClientRect().left;
+          const mouseY = event.clientY - canvas.getBoundingClientRect().top;
+
+          selectionEnd = getCharacterIndexAtPosition(mouseX, mouseY);
+          drawText();
+        }
+      }
+
+      function handleMouseUp(event) {
+        isDragging = false;
+      }
+
+      function getCharacterIndexAtPosition(x, y) {
+        let index = 0;
+        let offsetX = 10; // Offset from left edge of canvas
+        let offsetY = 30; // Offset from top edge of canvas
+        let currentWidth = 0;
+
+        ctx.font = "20px Arial";
+
+        for (let i = 0; i < text.length; i++) {
+          const charWidth = ctx.measureText(text[i]).width;
+          if (
+            x >= offsetX &&
+            x <= offsetX + charWidth &&
+            y >= offsetY - 20 &&
+            y <= offsetY
+          ) {
+            return index;
+          }
+          offsetX += charWidth;
+          index++;
+        }
+
+        return text.length;
+      }
+    </script>
+  </body>
+</html>
